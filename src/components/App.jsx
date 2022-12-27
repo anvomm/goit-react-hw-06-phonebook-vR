@@ -1,23 +1,27 @@
 import { useState, useEffect } from 'react';
-import { nanoid } from 'nanoid';
+/* import { nanoid } from 'nanoid'; */
 import { GlobalStyles } from 'utils/GlobalStyles';
 import { Section } from './Section/Section';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
-import { Text, Span } from './ContactList/ContactList.styled';
+/* import { Text, Span } from './ContactList/ContactList.styled'; */
+import { useSelector } from 'react-redux';
+import { getContacts } from 'redux/contacts/contacts-selectors';
 
 export const App = () => {
-  const [contacts, setContacts] = useState(
+  /* const [contacts, setContacts] = useState(
     JSON.parse(localStorage.getItem('contacts')) || []
-  );
+  ); */
   const [filter, setFilter] = useState('');
+
+  const contacts = useSelector(getContacts);
 
   useEffect(() => {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  const addContact = contactObject => {
+  /*const addContact = contactObject => {
     const newContact = {
       ...contactObject,
       id: nanoid(),
@@ -31,16 +35,16 @@ export const App = () => {
       return alert(`${newContact.name} is already in contacts.`);
     }
 
-    setContacts(prevContacts => [...prevContacts, newContact]);
-  };
+     setContacts(prevContacts => [...prevContacts, newContact]); 
+  };*/
 
-  const deleteContact = idToDelete => {
+  /* const deleteContact = idToDelete => {
     setContacts(prevContacts =>
       prevContacts.filter(contact => contact.id !== idToDelete)
     );
-  };
+  }; */
 
-  const registerFilterValue = e => {
+  /* const registerFilterValue = e => {
     setFilter(e.target.value);
   };
 
@@ -50,32 +54,33 @@ export const App = () => {
     return contacts.filter(({ name }) =>
       name.toLowerCase().includes(normalizedString)
     );
-  };
+  }; */
 
   return (
     <div>
       <Section>
         <h1>Phonebook</h1>
-        <ContactForm addContact={addContact}></ContactForm>
+        <ContactForm />
       </Section>
 
       <Section>
         <h2>Contacts</h2>
-        <Filter filter={filter} findContact={registerFilterValue}></Filter>
+        <Filter /* filter={filter} findContact={registerFilterValue} */
+        ></Filter>
 
-        {contacts.length === 0 && filter === '' ? (
+        {/* {contacts.length === 0 && filter === '' ? (
           <Text>Unfortunately your contacts list is empty</Text>
         ) : filterContacts().length === 0 && filter !== '' ? (
           <Text>
             Your list does not contain the contact named
             <Span> {filter}</Span>
           </Text>
-        ) : (
-          <ContactList
-            contacts={filterContacts()}
-            deleteContact={deleteContact}
-          />
-        )}
+        ) : ( */}
+        <ContactList
+        /* contacts={filterContacts()} */
+        /* deleteContact={deleteContact} */
+        />
+        {/* )} */}
       </Section>
 
       <GlobalStyles />
