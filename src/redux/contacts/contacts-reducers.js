@@ -11,7 +11,8 @@ export const contactsReducer = (
       );
 
       if (isExist) {
-        return alert(`${payload.name} is already in contacts.`);
+        alert(`${payload.name} is already in contacts.`);
+        return state;
       }
 
       return [...state, payload];
