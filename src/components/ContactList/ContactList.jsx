@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { getContacts } from 'redux/contacts/contacts-selectors';
 import { getFilterValue } from 'redux/filter/filter-selectors';
 import { Contact } from 'components/Contact/Contact';
-import { List, ListItem } from './ContactList.styled';
+import { List, ListItem, Span, Text } from './ContactList.styled';
 
 export const ContactList = () => {
   const contacts = useSelector(getContacts);
@@ -12,7 +12,7 @@ export const ContactList = () => {
     name.toLowerCase().includes(filter)
   );
 
-  return (
+  return contacts.length !== 0 && filteredContacts.length !== 0 ? (
     <List>
       {filteredContacts.map(({ name, number, id }) => (
         <ListItem key={id}>
@@ -20,5 +20,12 @@ export const ContactList = () => {
         </ListItem>
       ))}
     </List>
+  ) : contacts.length === 0 ? (
+    <Text>Unfortunately your contacts list is empty</Text>
+  ) : (
+    <Text>
+      Your list does not contain the contact named
+      <Span> {filter}</Span>
+    </Text>
   );
 };
