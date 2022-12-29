@@ -1,9 +1,6 @@
 import { ADD_CONTACT, DELETE_CONTACT } from './contacts-types';
 
-export const contactsReducer = (
-  state = JSON.parse(localStorage.getItem('contacts')) || [],
-  { type, payload }
-) => {
+export const contactsReducer = (state = [], { type, payload }) => {
   switch (type) {
     case ADD_CONTACT:
       return [...state, payload];
