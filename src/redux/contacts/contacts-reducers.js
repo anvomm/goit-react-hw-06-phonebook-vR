@@ -6,15 +6,6 @@ export const contactsReducer = (
 ) => {
   switch (type) {
     case ADD_CONTACT:
-      const isExist = state.find(
-        ({ name }) => name.toLowerCase() === payload.name.toLowerCase()
-      );
-
-      if (isExist) {
-        alert(`${payload.name} is already in contacts.`);
-        return state;
-      }
-
       return [...state, payload];
     case DELETE_CONTACT:
       return state.filter(contact => contact.id !== payload);
